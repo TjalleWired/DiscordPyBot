@@ -4,6 +4,7 @@ from google_api import google_api
 from deepfryer import deepfry
 from discord.ext import commands
 from credentials import token
+from meme_generator import memeGen
 from utils import utils
 import discord
 import os
@@ -14,6 +15,7 @@ w = wiki_api
 g = google_api
 d = deepfry
 u = utils
+m = memeGen
 
 commandList = """
 !help - See this message
@@ -86,6 +88,8 @@ async def on_message(message):
                 u.removeDownloads()
             except:
                 await message.channel.send("Image not found")
-        
+
+    if message.content.startswith('!memegen'):
+        await message.channel.send(str(m.createMeme("101470", "proof", "of concept")))
 
 client.run(token)
